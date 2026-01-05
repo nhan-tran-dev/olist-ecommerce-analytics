@@ -38,20 +38,28 @@ The data warehouse is modeled using a dimensional (star-schema) approach with
 clear separation of fact tables by grain.
 
 ### High-level dimensional model
-![DW Summary ERD](03_Data_Architecture/erd_dw_summary.png)
+![DW Summary ERD](03_Data_Architecture/erd_dw_summary.jpg)
 
 ### Full dimensional model (technical view)
-![DW Full ERD](03_Data_Architecture/erd_dw_full.png)
+![DW Full ERD](03_Data_Architecture/erd_dw_full.jpg)
 
 ---
 
 ## 4. ETL & Data Engineering (SSIS)
 
-- Raw ingestion from CSV
-- Data cleaning and standardization
-- Incremental load logic
-- Surrogate key management
-- Stored procedures for fact/dimension loads
+## 4. ETL & Data Engineering (SSIS)
+
+The ETL layer is implemented using SQL Server Integration Services (SSIS) and
+designed to support incremental, production-style data loading.
+
+SSIS is responsible for orchestration, while business logic and incremental
+load rules are encapsulated in SQL Server stored procedures.
+
+### ETL Control Flow
+![SSIS Control Flow](04_ETL_SSIS/ssis_control_flow.png)
+
+### Incremental Load Implementation
+![SSIS Incremental Logic](04_ETL_SSIS/ssis_incremental_logic.png)
 
 ---
 
