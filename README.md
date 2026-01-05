@@ -65,14 +65,15 @@ load rules are encapsulated in SQL Server stored procedures.
 
 ## 5. Power BI Data Modeling
 
-- Import mode from DW core
-- Star schema respected where possible
-- Bridge table used for Payment × Category analysis
-- `TREATAS` preferred over bidirectional relationships
+Power BI imports curated tables from the DW core (Import mode) and applies a star-schema semantic layer.
+The model keeps facts at their natural grain (orders, items, payments, reviews) and uses a bridge table to
+enable Payment × Category analysis without using bidirectional relationships.
 
-Known modeling challenges:
-- Revenue by category ≠ revenue by payment (grain differences)
-- Filter context changes during drill-through
+### Semantic model (relationships)
+![Power BI Model](06_Power_BI/pbi_model_relationships.png)
+
+### Payment × Category using bridge + TREATAS
+![TREATAS Example](06_Power_BI/pbi_bridge_or_treatas.png)
 
 ---
 
