@@ -47,8 +47,6 @@ clear separation of fact tables by grain.
 
 ## 4. ETL & Data Engineering (SSIS)
 
-## 4. ETL & Data Engineering (SSIS)
-
 The ETL layer is implemented using SQL Server Integration Services (SSIS) and
 designed to support incremental, production-style data loading.
 
@@ -63,7 +61,7 @@ load rules are encapsulated in SQL Server stored procedures.
 
 ---
 
-## 5. Power BI Data Modeling
+## 5. Power BI Semantic Model
 
 Power BI imports curated tables from the DW core (Import mode) and applies a star-schema semantic layer.
 The model keeps facts at their natural grain (orders, items, payments, reviews) and uses a bridge table to
@@ -79,19 +77,92 @@ enable Payment × Category analysis without using bidirectional relationships.
 
 ## 6. Dashboards
 
-- Overview
-- Sales Performance
-- Category Analysis
-- Customer Behavior
-- Drill-through Analysis
+### 6.1 Overview Dashboard
+![Overview Dashboard](06_Power_BI/dashboard_overview.png)
 
-(Screenshots added below)
+Key KPIs:
+- Total Orders
+- Delivery & Cancellation Rates
+- On-time Delivery
+- Average Review Score
+
+---
+
+### 6.2 Sales Performance
+![Sales Performance](06_Power_BI/dashboard_sales_performance.png)
+
+Focus:
+- Revenue & order trends
+- Monthly growth
+- Regional performance
+
+---
+
+### 6.3 Category Analysis
+![Category Analysis](06_Power_BI/dashboard_category_analysis.png)
+
+Focus:
+- Top & bottom categories
+- Revenue contribution
+- Product mix
+
+---
+
+### 6.4 Customer Behavior
+![Customer Behavior](06_Power_BI/dashboard_customer_behavior.png)
+
+Focus:
+- New vs Returning customers
+- RFM segmentation
+- Purchase frequency
+
+---
+
+### 6.5 Drill-through Analysis
+![Drill Through](06_Power_BI/dashboard_drill_through.png)
+
+Focus:
+- Category → Order → Customer drill-through
+- Payment & delivery impact analysis
+
 
 ---
 
 ## 7. Key Business Insights
 
-(To be added)
+### 1. Delivery performance strongly impacts customer satisfaction
+- Orders delivered on time have significantly higher review scores
+- Late deliveries correlate with lower ratings and repeat purchase drop
+
+**Action:**  
+Improve seller handling SLA and prioritize high-delay regions.
+
+---
+
+### 2. A small number of categories drive most revenue
+- Top 5 categories contribute the majority of total revenue
+- Long-tail categories have low volume but high operational cost
+
+**Action:**  
+Focus marketing and inventory optimization on high-performing categories.
+
+---
+
+### 3. High churn after first purchase
+- Majority of customers purchase only once
+- Returning customers generate higher AOV and better reviews
+
+**Action:**  
+Introduce loyalty campaigns targeting first-time buyers.
+
+---
+
+### 4. Payment method influences order completion
+- Installment-based payments show higher completion rates
+- Certain payment types correlate with cancellations
+
+**Action:**  
+Promote preferred payment methods during checkout.
 
 ---
 
