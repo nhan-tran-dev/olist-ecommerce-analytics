@@ -22,13 +22,18 @@ Thumbs.db
 *.suo
 *.cache
 
-# Python
+# Python / Jupyter
 .ipynb_checkpoints/
+__pycache__/
+*.pyc
+*.pyo
+.env
 
 # Raw data files
 *.csv
-*.zip.ipynb_checkpoints/
+*.zip
 *.7z
+!07_Advance_Analytics/**/outputs/*.csv
 
 # Logs
 *.log
