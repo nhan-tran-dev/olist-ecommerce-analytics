@@ -125,10 +125,53 @@ Focus:
 - Category → Order → Customer drill-through
 - Payment & delivery impact analysis
 
+---
+
+## 7. Advanced Analytics – Customer Segmentation (RFM + KMeans)
+
+In addition to descriptive analytics, this project applies **machine learning–based customer segmentation**
+to better understand demonstrated customer value and churn risk.
+
+### 7.1 RFM Feature Engineering
+- **Recency**: Days since last purchase
+- **Frequency**: Number of completed orders
+- **Monetary**: Total payment amount
+
+RFM metrics are computed from the data warehouse and exported for analytical modeling.
+
+### 7.2 KMeans Clustering
+- Log-scaled RFM features
+- Elbow method used to evaluate optimal cluster count
+- Final business-driven selection: **K = 5** (interpretable, actionable)
+
+![Elbow Plot](07_Advance_Analytics/customer_segmentation_rfm_kmeans/outputs/elbow_plot.png)
+
+### 7.3 Cluster Visualization
+![Cluster Scatter](07_Advance_Analytics/customer_segmentation_rfm_kmeans/outputs/cluster_scatter.png)
+
+### 7.4 Cluster Interpretation & Labeling
+
+Clusters are mapped to business-friendly segments:
+
+| Cluster Name | Description |
+|-------------|------------|
+| Active High-Value Customers | Frequent, recent, high spend |
+| High-Spending At-Risk Customers | High spend but declining recency |
+| In-Active Mid-Value Customers | Moderate spend, long inactivity |
+| At-Risk Low-Value Customers | Low spend, long inactivity |
+| New Customers | Recent, low frequency |
+
+### 7.5 Persisting Results Back to the Warehouse
+- Final cluster labels are written back to:
+  `mart.customer_rfm_clusters`
+- Enables direct use in Power BI without Python dependency
+
+This creates a **closed analytics loop**:
+DW → Python ML → DW → Power BI.
 
 ---
 
-## 7. Key Business Insights
+## 8. Key Business Insights
 
 ### 1. Delivery performance strongly impacts customer satisfaction
 - Orders delivered on time have significantly higher review scores
@@ -166,36 +209,37 @@ Promote preferred payment methods during checkout.
 
 ---
 
-## 8. Reproducibility
+## 9. Reproducibility
 
-Steps to reproduce:
-1. Restore SQL Server database
-2. Run SSIS packages
-3. Open Power BI report
+Steps to reproduce the analytics environment:
 
----
-
-## 9. Repository Structure
-
-01_Business_Context
-02_Data_Source
-03_Data_Architecture
-04_ETL_SSIS
-05_SQL_Data_Warehouse
-06_Power_BI
+1. Restore the SQL Server database from `05_SQL_Data_Warehouse`
+2. Configure connection strings and run SSIS incremental packages
+3. Open the Power BI report from `06_Power_BI` (Import mode)
 
 ---
 
-## 10. Tech Stack
+## 10. Repository Structure
 
-- SQL Server
-- SSIS
-- Power BI
-- Git & GitHub
+01_Business_Context/ # Business problem, KPIs, assumptions
+02_Data_Source/ # Raw dataset description (Kaggle)
+03_Data_Architecture/ # Architecture diagrams & ERDs
+04_ETL_SSIS/ # SSIS packages & incremental logic
+05_SQL_Data_Warehouse/ # DDL, stored procedures, fact/dim tables
+06_Power_BI/ # Semantic model & dashboards
 
 ---
 
-## 11. Future Improvements
+## 11. Tech Stack
+
+- SQL Server (Data Warehouse)
+- SSIS (Incremental ETL)
+- Power BI (Semantic model & dashboards)
+- Git & GitHub (Version control)
+
+---
+
+## 12. Future Improvements
 
 - Incremental refresh in Power BI Service
 - Automated data quality tests
