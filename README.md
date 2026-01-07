@@ -28,7 +28,7 @@ analytics with incremental ETL and clear separation of concerns.
 Data flows from raw CSV sources through staging layers into a dimensional
 data warehouse, which serves as the single source of truth for BI and analytics.
 
-![Architecture Overview](03_Data_Architecture/architecture_overview.png)
+![Architecture Overview](03_Data_Architecture/Architecture_Overview.png)
 
 ---
 
